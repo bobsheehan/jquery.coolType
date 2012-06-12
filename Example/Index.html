@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>jQuery.coolType Example</title>
+        <style type="text/css">
+            #display
+            {
+                height: 150px;
+                background: #000;
+                padding: 15px;
+                border: #000;
+                color: #0f0;
+                overflow: auto;
+                border-radius: 15px;
+            }
+        </style>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script type="text/javascript" src="Scripts/SoundManager2/soundmanager2-nodebug-jsmin.js"></script>
+        <script type="text/javascript" src="../jQuery.coolType_1.0.1.js"></script>
+        <script type="text/javascript" src="Scripts/jquery.scrollTo-1.4.2-min.js"></script>
+        <script type="text/javascript">
+            soundManager.url = 'Scripts/SoundManager2/';
+            $(function ()
+            {
+                // Override default setup values.
+                $.coolType.setup(
+                {
+                    speed: 10,
+                    playSound: true,
+                    soundFile: 'digitalbeep.mp3'
+                });
+                
+                // Execute button click event.
+                $('#execute').click(function (e)
+                {
+                    var text = $('#text').val();
+                    $('#display').coolType(
+                        text,
+                        function ()
+                        {
+                            // Callback fires after typing finishes.
+                        },
+                        {
+                            speed: $('#speed').val(),
+                            caretChar: $('#caretChar').val(),
+                            insertBefore: $('#insertBefore').val(),
+                            insertAfter: $('#insertAfter').val(),
+                            delayBefore: $('#delayBefore').val(),
+                            delayAfter: $('#delayAfter').val(),
+                            style: $('#style').val(),
+                            inline: $('#inline').is(':checked'),
+                            scrollToBottom: $('#scrollToBottom').is(':checked'),
+                            caretBlinkSpeed: $('#caretBlinkSpeed').val()
+                        }
+                    );   
+                });
+                
+                // Display introduction text.
+                var text = "Welcome to the jQuery.coolType plugin demonstration. Adjust the options below to change what is passed into the plugin and then 'execute' to see what happens. Have fun!";
+                $('#display').coolType(text, null, { style: 'color: #ff0;', insertAfter: '<br /><br />' });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="display">
+        </div>
+        <br />
+        Speed: <input id="speed" type="text" value="10" /><br />
+        Caret Character: <input id="caretChar" type="text" value="█" /><br />
+        Caret Blink Speed: <input id="caretBlinkSpeed" type="text" value="300" /><br />
+        Insert Before: <input id="insertBefore" type="text" value="&gt; " /><br />
+        Insert After: <input id="insertAfter" type="text" value="" /><br />
+        Delay Before: <input id="delayBefore" type="text" value="0" /><br />
+        Delay After: <input id="delayAfter" type="text" value="3000" /><br />
+        Style: <input id="style" type="text" value="color: lime; font-family: Courier New;" /><br />
+        Inline: <input id="inline" type="checkbox" /><br />
+        Scroll To Bottom: <input id="scrollToBottom" type="checkbox" checked="checked" /><br />
+        <br />
+        Text:<br /><textarea id="text" style="width: 300px; height: 150px;" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae tellus lacus, at ornare augue. Vivamus fermentum tellus vitae purus cursus in tempor nisl dignissim.</textarea><br />
+        <input id="execute" type="button" value="Execute" />
+    </body>
+</html>

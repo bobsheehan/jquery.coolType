@@ -4,129 +4,24 @@
         <style type="text/css">
             body
             {
-                background: #555;
-                color: #fff;
-            }
-            #display
-            {
-                height: 250px;
                 background: #000;
-                padding: 15px;
-                border: #000;
                 color: #0f0;
-                overflow: auto;
-                border-radius: 25px;
-                font-size: 12px;
+                font-family: Consolas, "Courier New";
+                padding: 50px;
             }
         </style>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        <script type="text/javascript" src="Scripts/SoundManager2/soundmanager2-nodebug-jsmin.js"></script>
-        <script type="text/javascript" src="../jQuery.coolType_1.0.1.js"></script>
-        <script type="text/javascript" src="Scripts/jquery.scrollTo-1.4.2-min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../jquery.coolType.js"></script>
         <script type="text/javascript">
-            soundManager.url = 'Scripts/SoundManager2/';
-            $(function ()
-            {
-                // Override default setup values.
-                $.coolType.setup(
-                {
-                    speed: 10,
-                    playSound: true,
-                    soundFile: 'digitalbeep.mp3'
-                });
-                
-                // Execute button click event.
-                $('#execute').click(function (e)
-                {
-                    var text = $('#text').val();
-                    $('#display').coolType(
-                        text,
-                        function ()
-                        {
-                            // Callback fires after typing finishes.
-                        },
-                        {
-                            speed: $('#speed').val(),
-                            caretChar: $('#caretChar').val(),
-                            insertBefore: $('#insertBefore').val(),
-                            insertAfter: $('#insertAfter').val(),
-                            delayBefore: $('#delayBefore').val(),
-                            delayAfter: $('#delayAfter').val(),
-                            style: $('#style').val(),
-                            inline: $('#inline').is(':checked'),
-                            scrollToBottom: $('#scrollToBottom').is(':checked'),
-                            caretBlinkSpeed: $('#caretBlinkSpeed').val()
-                        }
-                    );   
-                });
-                
-                // Clear button click event.
-                $('#clear').click(function (e)
-                {
-                    $('#display').html(''); 
-                });
-                
-                // Display introduction text.
-                var text = "Welcome to the jQuery.coolType plugin demonstration. Adjust the options below to change what is passed into the plugin and then 'execute' to see what happens. Have fun!";
-                $('#display').coolType(text, null, { style: 'color: #ff0;', insertAfter: '<br /><br />' });
+            $(function () {
+                var text = $('#textToType').text();
+                $('body').coolType(text);
             });
         </script>
     </head>
     <body>
-        <div style="width: 750px; margin: auto;">
-            <div id="display">
-            </div>
-            <br />
-            <table style="width: 450px; margin: auto;">
-                <tr>
-                    <td style="text-align: right;">Speed:</td>
-                    <td><input id="speed" type="text" value="10" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Caret Character:</td>
-                    <td><input id="caretChar" type="text" value="█" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Caret Blink Speed:</td>
-                    <td><input id="caretBlinkSpeed" type="text" value="300" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Insert Before:</td>
-                    <td><input id="insertBefore" type="text" value="&gt; " /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Insert After:</td>
-                    <td><input id="insertAfter" type="text" value="<br /><br />" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Delay Before:</td>
-                    <td><input id="delayBefore" type="text" value="0" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Delay After:</td>
-                    <td><input id="delayAfter" type="text" value="3000" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Style:</td>
-                    <td><input id="style" type="text" value="color: lime; font-family: Courier New;" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Inline:</td>
-                    <td><input id="inline" type="checkbox" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;">Scroll To Bottom:</td>
-                    <td><input id="scrollToBottom" type="checkbox" checked="checked" /></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right; vertical-align: top;">Text:</td>
-                    <td><textarea id="text" style="width: 300px; height: 150px;" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae tellus lacus, at ornare augue. Vivamus fermentum tellus vitae purus cursus in tempor nisl dignissim.</textarea></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><br /><input id="execute" type="button" value="Execute" /> <input id="clear" type="button" value="Clear" /></td>
-                </tr>
-            </table>
+        <div id="textToType" style="display: none">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta consectetur pretium. Ut scelerisque, quam eget tempor sollicitudin, ipsum nunc molestie risus, non cursus lacus tortor sed metus. Fusce varius, risus a convallis hendrerit, nisl metus porttitor tellus, eget venenatis metus tellus tincidunt est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sollicitudin porta leo ac suscipit. Donec dictum laoreet tristique. In hac habitasse platea dictumst. Nunc nulla odio, malesuada eu pellentesque sit amet, vestibulum a ipsum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur porttitor, massa id egestas feugiat, purus erat semper massa, sit amet venenatis nunc nisi at justo. Cras posuere commodo fermentum. Integer non est nibh, sit amet tincidunt nibh. Curabitur imperdiet mauris vitae ipsum malesuada a mattis nisi suscipit.
         </div>
     </body>
 </html>

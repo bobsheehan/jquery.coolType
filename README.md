@@ -1,16 +1,16 @@
-# Usage
+## Usage
 
     <script type="text/javascript" src="/scripts/jquery.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.coolType.js"></script>
 
-## Default Options
+### Default Options
 
 Using jquery.coolType with default options is extremely simple.
 
     var msg = 'This line is being typed out character by character with the default coolType options.';
     $('body').coolType(msg);
 
-## Custom Options
+### Custom Options
 
 It is possible to get finer control over how the text is typed if you supply custom options. All values in the sample below are the default values.
 

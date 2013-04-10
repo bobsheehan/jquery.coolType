@@ -43,3 +43,15 @@ To add new expansions simply pass in a string array containing the expansions.
     $('body').coolType('Hello&nbsp;world!', {
         expansions: [ '&nbsp;' ]
     });
+    
+**NOTE:** This does not work for HTML tags, at least not the way you'd expect.
+
+    $('body').coolType('<h1>hello world!</h1>', {
+        expansions: [ '<h1>', '</h1>' ]
+    });
+    
+Technically the above code will work but because coolType inserts the opening tag onto the page before the closing tag most browsers will automatically add a closing tag immediately after. Most browsers will then also ignore the closing tag we add because the opening tag was already closed automatically. Essentially you end up with this:
+
+    <h1></h1>hello world!</h1>
+    
+This is a much more difficult problem to solve than one might think so I don't currently have any plans to support HTML tags in coolType. However, do feel free to submit pull requests if you think you have an idea how to accomplish this.

@@ -1,3 +1,5 @@
+jquery.coolType is a JQuery plugin that inserts a string into an element one character at a time, giving a unique *typing* effect.
+
 ## Usage
 
     <script type="text/javascript" src="/scripts/jquery.min.js"></script>

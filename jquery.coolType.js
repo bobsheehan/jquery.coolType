@@ -2,6 +2,7 @@
 
     var defaults = {
         typeSpeed: 10,
+        inline: true,
         cursorChar: '&#9608;',
         cursorBlinkSpeed: 300,
         delayBeforeType: 1000,
@@ -24,7 +25,8 @@
             $container = $('<span>'),
             $cursor = $('<span>')
                 .css({
-                    paddingLeft: 3
+                    paddingLeft: 3,
+                    display: settings.inline ? 'inline' : 'block'
                 })
                 .html(settings.cursorChar)
                 .hide();

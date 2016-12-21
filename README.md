@@ -27,6 +27,7 @@ It is possible to get finer control over how the text is typed if you supply cus
         onComplete: false, // A function that will be called when coolType is finished.
         onBeforeType: false, // A function that will be called right before typing begins.
         onAfterType: false, // A function that will be called right after typing finishes.
+        typeHTML:false, //if true then output will be written out as if the html was inline (i.e. the browser will interpert the tags)
         expansions: [
             '&nbsp;',
             '&gt;',
@@ -58,3 +59,19 @@ Technically the above code will work but because coolType inserts the opening ta
     <h1></h1>hello world!</h1>
     
 This is a much more difficult problem to solve than one might think so I don't currently have any plans to support HTML tags in coolType. However, do feel free to submit pull requests if you think you have an idea how to accomplish this.
+
+** Update Note:**
+Yup... HTML was harder than it seemed but I * think* I figured it out.  To see  pass typeHTML:true . Technically this will work with plain text too so in theory it can be the default. However, since I am not the original author so I'll leave it up to him to make that change or request it. 
+ 
+ I've tested this with a bunch of scenarios but please let me know if there are conditions that are nor performing as expected:
+ 
+ **Example 1: Plain text:**
+
+     $('body').coolType('Hello world'); 
+
+ 
+ **Example 2: Nested HTML**
+ 
+
+    $('body').coolType('Hello world....<br>... and ... <h2><b><span style="color:red">Happy New Year!</span></b></h2>',{"typeHTML":"true","typeSpeed":"40"});
+

@@ -14,14 +14,19 @@
         <script type="text/javascript" src="../jquery.coolType.js"></script>
         <script type="text/javascript">
             $(function () {
-                var text = $('#textToType').text();
-                $('body').coolType(text);
+                var text = $('#textToTypeHTML').html();
+                $('body').coolType(text,{"typeHTML":"true"});
+             
+               
             });
         </script>
     </head>
     <body>
-        <div id="textToType" style="display: none">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta consectetur pretium. Ut scelerisque, quam eget tempor sollicitudin, ipsum nunc molestie risus, non cursus lacus tortor sed metus. Fusce varius, risus a convallis hendrerit, nisl metus porttitor tellus, eget venenatis metus tellus tincidunt est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sollicitudin porta leo ac suscipit. Donec dictum laoreet tristique. In hac habitasse platea dictumst. Nunc nulla odio, malesuada eu pellentesque sit amet, vestibulum a ipsum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur porttitor, massa id egestas feugiat, purus erat semper massa, sit amet venenatis nunc nisi at justo. Cras posuere commodo fermentum. Integer non est nibh, sit amet tincidunt nibh. Curabitur imperdiet mauris vitae ipsum malesuada a mattis nisi suscipit.
+        <div id="textToTypeHTML" style="display: none">
+            <h1>Hello</h1><p>Lets get started with our <b></i>Latin</i></b> lesson...</p>
+            Lorem ipsumdolor sit amet, consectetur adipiscing elit. Etiam porta consectetur pretium. Ut scelerisque, quam eget tempor sollicitudin, ipsum nunc molestie risus, non cursus lacus tortor sed metus. Fusce varius, risus a convallis hendrerit, nisl metus porttitor tellus, eget venenatis metus tellus tincidunt est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sollicitudin porta leo ac suscipit. Donec dictum laoreet tristique. In hac habitasse platea dictumst. Nunc nulla odio, malesuada eu pellentesque sit amet, vestibulum a ipsum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur porttitor, massa id egestas feugiat, purus erat semper massa, sit amet venenatis nunc nisi at justo. Cras posuere commodo fermentum. Integer non est nibh, sit amet tincidunt nibh. Curabitur imperdiet mauris vitae ipsum malesuada a mattis nisi suscipit.
         </div>
+       
+
     </body>
 </html>

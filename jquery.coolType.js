@@ -105,7 +105,7 @@
             idSelector = null;
             if ( el.nodeName != '#text'){
                 $.each( el.attributes, function( i, at) {
-                    nodeAtribs =nodeAtribs + at.nodeName + '="' + at.nodeValue +'" ';
+                    nodeAtribs =nodeAtribs + at.nodeName + '="' + at.value +'" ';
                     if (at.nodeName == "id"){idSelector=at.nodeValue;}
                 });
                
@@ -224,9 +224,11 @@
                     var myParentId= $htmlTags[$textIndex].parentNode == null? '' : $htmlTags[$textIndex].parentNode.id;
                     if (myParentId!=''){
                         $("#"+myParentId).append($text[charIndex]);
+                        $cursor.appendTo("#"+myParentId);
                     }
                     else{
                         $baseNode.append($text[charIndex]);
+                        $cursor.appendTo($baseNode);
                     }
                     charIndex++;
                 }
@@ -279,5 +281,9 @@
                     typeHTML();
                 }
         }
+        
+     return $this.each(function(){}
+                       );
     };
+   
 })(jQuery);

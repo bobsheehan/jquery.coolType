@@ -63,7 +63,7 @@ This is a much more difficult problem to solve than one might think so I don't c
 ** Update Note:**
 Yup... HTML was harder than it seemed but I * think* I figured it out.  To see  pass typeHTML:true . Technically this will work with plain text too so in theory it can be the default. However, since I am not the original author so I'll leave it up to him to make that change or request it. 
  
- I've tested this with a bunch of scenarios but please let me know if there are conditions that are nor performing as expected:
+ I've tested this with a bunch of scenarios but please let me know if there are conditions that are not performing as expected:
  
  **Example 1: Plain text:**
 

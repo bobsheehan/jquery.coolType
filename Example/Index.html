@@ -22,7 +22,7 @@
         <script type="text/javascript">
             $(function () {
                 $('#question').val('Say what?? Can you slow down a bit please?');
-    
+                $('#instructions').coolType('<h4>This is an example page that uses some neat features of coolTyping...OK???.... Let me repeat that in case you missed it.</h4>',{"typeSpeed":100,"loopCount":-1,"typeHTML":"true"});
             });
             function startTyping(){
               
@@ -44,6 +44,8 @@
     </head>
     <body>
         <div>
+            <div id="instructions"></div>
+            <p></p>
             <button onclick="startTyping()">Start HTML Typing</button>
             <button onclick="stopTyping()">Stop all Typing</button>
             <p>

@@ -1,7 +1,7 @@
 (function ($) {
 
-    var defaults = {
-        typeSpeed: 10,
+    $.fn.cooltTypeDefaults = {
+        typeSpeed: 20,
         inline: true,
         cursorChar: '&#9608;',
         cursorBlinkSpeed: 300,
@@ -10,7 +10,9 @@
         onComplete: false,
         onBeforeType: false,
         onAfterType: false,
-        typeHTML:false,  
+        typeHTML:false, 
+        clearMode:true,
+        loopCount : 1, // set to -1 if you want to continiously loop
         expansions: [
             '&nbsp;',
             '&gt;',
@@ -19,6 +21,7 @@
             '&amp;'
         ]
     };
+    
     
     class TextTypeNode{
         constructor(tag, text, tagAttrib, parentNode,id) {
@@ -30,35 +33,58 @@
 
       } 
     }
-
+    $myId="ctt";
+    
+    $.fn.coolTypeStop = function(){
+          var $this = this;
+          if ($this.data('blinkieIntervalId')!=null) {clearInterval($this.data('blinkieIntervalId'));};
+          if ($this.data('coolTypeIntervalId') != null ){ clearInterval($this.data('coolTypeIntervalId'))};
+          if ($this.data('blinkieId')!= null) {$("#"+$this.data('blinkieId')).remove()};
+          return $this.each(function(){});
+    }
+    
     $.fn.coolType = function (text, options) {
-        var $this = this,
-            settings = $.extend({}, defaults, options),
-            $container = $('<span>'),
+       
+        var $this = this, 
+            settings = $.extend({}, $.fn.cooltTypeDefaults, options);
+
+        
+        if ($this.data('blinkieId')!= null){
+            //stop any typing if it's going on
+            $.fn.coolTypeStop();
+        }
+       
+        if (settings.clearMode){
+             $this.empty();
+        }
+        
+        var $typeIdSelector= genID($myId+'-cooltype', 0),
+            $container = $('<span id="'+ $typeIdSelector + '">'),
             $baseNode = $container,
-            $myId="ctt",
             $htmlTags= [],
             $textIndex = 0,
             $appendToContainer = null,
-            $cursor = $('<span>')
+            $cursorIdSelector= genID($myId+'-blinkie', 0),
+            $cursor = $('<span id=' + $cursorIdSelector +'>')
                 .css({
                     paddingLeft: 3,
                     display: settings.inline ? 'inline' : 'block'
                 })
                 .html(settings.cursorChar)
                 .hide();
-
+        $this.data('blinkieId',$cursorIdSelector);
+        $this.data('typeieId',$typeIdSelector);
         $container.appendTo($this);
         $cursor.appendTo($this);
 
         function startBlinking() {
-            $cursor.data('intervalId', setInterval(function () {
+            $this.data('blinkieIntervalId', setInterval(function () {
                 $cursor.toggle();
             }, settings.cursorBlinkSpeed));
         }
 
         function stopBlinking() {
-            clearInterval($cursor.data('intervalId'));
+            clearInterval($this.data('blinkieIntervalId'));
         }
 
         function expandChar(charIndex) {
@@ -144,11 +170,11 @@
           
         function findNext(next){
     
-    if (next < $htmlTags.length) {
-       return ++next;
-    }else{
-        return -1
-    }
+            if (next < $htmlTags.length) {
+               return ++next;
+            }else{
+                return -1
+            }
 }
  
         function processTags(indx){
@@ -192,6 +218,7 @@
                     }
         }
         
+        
         function typeHTML() {
             if (settings.onBeforeType) settings.onBeforeType();
             var charIndex = 0;
@@ -199,13 +226,23 @@
             parseMe.nodeCount = 0;  
             var html = $.parseHTML(text);
             parseMe(html, null);
-
-            var intervalId = setInterval( function(){
+            var loopCount = 1;
+             $this.data('coolTypeIntervalId', setInterval( function(){
     
             if (($textIndex<0)||($textIndex >= $htmlTags.length)){
-                  clearInterval(intervalId);
-                  noMoreBlinke();
-                  return;
+                
+                  if ((settings.loopCount>0) && (loopCount>=settings.loopCount)){
+                      clearInterval($this.data('coolTypeIntervalId'));
+                      noMoreBlinke();
+                      return;
+                 }else{
+                     //reset loop
+                     $textIndex = 0;
+                     charIndex=0;
+                     $baseNode.empty();
+                     loopCount++;
+                    
+                 }
             }
 
             if ($htmlTags[$textIndex].tag !=""){
@@ -235,29 +272,39 @@
 
               }else
                 {
-                   clearInterval(intervalId); 
-                    noMoreBlinke();
+                 // to do .... suspect this branch never executes     
+                   clearInterval($this.data('coolTypeIntervalId')); 
+                   noMoreBlinke();
                 }
 
-           } , settings.typeSpeed);
+           } , settings.typeSpeed)
+          );
         }
 
    // end  HTML cooltype functions 
         
         function typeText() {
+        
             if (settings.onBeforeType) settings.onBeforeType();
-            var charIndex = 0;
-            var intervalId = setInterval(function () {
+            var charIndex = 0,
+                loopCount = 1;
+            $this.data('coolTypeIntervalId',setInterval(function () {
                 var expanded = expandChar(charIndex),
                     char = expanded.char;
                 charIndex = expanded.charIndex;
                 $container.append(char);
                 charIndex++;
-                if (charIndex === text.length) {
-                    clearInterval(intervalId);
-                    noMoreBlinke();
+                if (charIndex >= text.length) {
+                    if ((settings.loopCount>0) && (loopCount>=settings.loopCount)){
+                         clearInterval($this.data('coolTypeIntervalId'));
+                         noMoreBlinke();
+                    }else{
+                        charIndex=0;
+                        $container.empty();
+                        loopCount++;
+                    }
                 }
-            }, settings.typeSpeed);
+            }, settings.typeSpeed));
         }
 
         if (settings.delayBeforeType > 0) {

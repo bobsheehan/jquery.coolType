@@ -1,5 +1,6 @@
 (function ($) {
 
+    'use strict';
     $.fn.cooltTypeDefaults = {
         typeSpeed: 20,
         inline: true,
@@ -10,8 +11,8 @@
         onComplete: false,
         onBeforeType: false,
         onAfterType: false,
-        typeHTML:false, 
-        clearMode:true,
+        typeHTML: false,
+        clearMode: true,
         loopCount : 1, // set to -1 if you want to continiously loop
         expansions: [
             '&nbsp;',
@@ -22,7 +23,15 @@
         ]
     };
     
-    
+    function genID(myKey, seedNum) {
+        var key = myKey + seedNum;
+        if (document.getElementById(key) !== null) {
+            return genID(myKey, ++seedNum);
+        } else {
+            return key;
+        }
+    }
+      
     class TextTypeNode{
         constructor(tag, text, tagAttrib, parentNode,id) {
            this.tag = tag;
@@ -33,47 +42,50 @@
 
       } 
     }
-    $myId="ctt";
     
-    $.fn.coolTypeStop = function(){
-          var $this = this;
-          if ($this.data('blinkieIntervalId')!=null) {clearInterval($this.data('blinkieIntervalId'));};
-          if ($this.data('coolTypeIntervalId') != null ){ clearInterval($this.data('coolTypeIntervalId'))};
-          if ($this.data('blinkieId')!= null) {$("#"+$this.data('blinkieId')).remove()};
-          return $this.each(function(){});
+    
+    var $myId = "ctt",
+        $text = "";
+    
+    $.fn.coolTypeStop = function () {
+        var $this = this;
+        if ($this.data('blinkieIntervalId') !== null) {clearInterval($this.data('blinkieIntervalId')); }
+        if ($this.data('coolTypeIntervalId') !== null) { clearInterval($this.data('coolTypeIntervalId')); }
+        if ($this.data('blinkieId') !== null) {$("#" + $this.data('blinkieId')).remove(); }
+        return $this.each(function () {});
     }
     
     $.fn.coolType = function (text, options) {
        
-        var $this = this, 
+        var $this = this,
             settings = $.extend({}, $.fn.cooltTypeDefaults, options);
 
         
-        if ($this.data('blinkieId')!= null){
+        if ($this.data('blinkieId') !== null) {
             //stop any typing if it's going on
             $.fn.coolTypeStop();
         }
        
-        if (settings.clearMode){
-             $this.empty();
+        if (settings.clearMode) {
+            $this.empty();
         }
         
-        var $typeIdSelector= genID($myId+'-cooltype', 0),
-            $container = $('<span id="'+ $typeIdSelector + '">'),
+        var $typeIdSelector = genID($myId + '-cooltype', 0),
+            $container = $('<span id="' + $typeIdSelector + '">'),
             $baseNode = $container,
-            $htmlTags= [],
+            $htmlTags = [],
             $textIndex = 0,
             $appendToContainer = null,
-            $cursorIdSelector= genID($myId+'-blinkie', 0),
-            $cursor = $('<span id=' + $cursorIdSelector +'>')
+            $cursorIdSelector = genID($myId + '-blinkie', 0),
+            $cursor = $('<span id=' + $cursorIdSelector + '>')
                 .css({
                     paddingLeft: 3,
                     display: settings.inline ? 'inline' : 'block'
                 })
                 .html(settings.cursorChar)
                 .hide();
-        $this.data('blinkieId',$cursorIdSelector);
-        $this.data('typeieId',$typeIdSelector);
+        $this.data('blinkieId', $cursorIdSelector);
+        $this.data('typeieId', $typeIdSelector);
         $container.appendTo($this);
         $cursor.appendTo($this);
 
@@ -110,16 +122,6 @@
      
  }        
     
-        function genID(myKey, seedNum){
-             var key = myKey + seedNum;
-             if (document.getElementById(key) != null){
-                 return genID(myKey, ++seedNum)
-             }
-             else{
-                 return key;
-             }
-         }
-          
         function parseMe(nodeHTML, parentNode){
     
      

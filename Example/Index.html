@@ -36,8 +36,17 @@
                $('#typeHTMLDiv').coolTypeStop();
             
             }
-             function typeQuestion(){
-                  $('#questionTextDiv').coolType($('#question').val(),{"typeSpeed":100});
+            
+            function typeQuestion(){
+                var prmpt=">>";
+                if ($('#keepHistory').is(':checked')){
+                    $('#questionTextDiv').coolType('<br/>'+ prmpt + $('#question').val(),{"typeSpeed":100,"clearMode":false,"typeHTML":"true"});
+                 
+               }else
+                 {
+                   $('#questionTextDiv').coolType(prmpt + $('#question').val(),{"typeSpeed":100,"clearMode":true, "typeHTML":"true"});
+
+                 }
              }
             
         </script>
@@ -52,7 +61,7 @@
             Ask a Question:<br/>
             <textarea id="question" rows=3 cols=40></textarea>
             <button onclick="typeQuestion()">Submit Question</button>
-        
+            <input type="checkbox" id="keepHistory"> Keep History
             </p>
         </div>
         <p><u>HTML typing goes here:</u></p><div id='typeHTMLDiv'></div>

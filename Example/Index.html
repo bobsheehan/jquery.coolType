@@ -1,77 +1,75 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>jQuery.coolType Example</title>
-        <style type="text/css">
-            body
-            {
-                background: #000;
-                color: #fff;
-                font-family: Consolas, "Courier New";
-                padding: 50px;
-            }
-            
-            .terminal{
-                color:green;
-                font-size: 1.5em;
-                text-decoration: none;
-                font-family: monospace;
-            }
-        </style>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type="text/javascript" src="../jquery.coolType.js"></script>
-        <script type="text/javascript">
-            $(function () {
-                $('#question').val('Say what?? Can you slow down a bit please?');
-                $('#instructions').coolType('<h4>This is an example page that uses some neat features of coolTyping...OK???.... Let me repeat that in case you missed it.</h4>',{"typeSpeed":100,"loopCount":-1,"typeHTML":"true"});
-            });
-            function startTyping(){
-              
-                var text = $('#textToTypeHTML').html();
-                $().cooltTypeDefaults.typeSpeed =40;  // this sets all typing speeds
-                $().cooltTypeDefaults.typeHTML = true; //passing {"typeHTML":"true"} works too
-                $('#typeHTMLDiv').coolType(text,{"loopCount":2});
-            }
-            function stopTyping(){
-               $('#questionTextDiv').coolTypeStop();
-               $('#typeHTMLDiv').coolTypeStop();
-            
-            }
-            
-            function typeQuestion(){
-                var prmpt=">>";
-                if ($('#keepHistory').is(':checked')){
-                    $('#questionTextDiv').coolType('<br/>'+ prmpt + $('#question').val(),{"typeSpeed":100,"clearMode":false,"typeHTML":"true"});
-                 
-               }else
-                 {
-                   $('#questionTextDiv').coolType(prmpt + $('#question').val(),{"typeSpeed":100,"clearMode":true, "typeHTML":"true"});
+<head>
+	<title>jQuery.coolType Example</title>
+	<style type="text/css">
+	           body
+	           {
+	               background: #000;
+	               color: #fff;
+	               font-family: Consolas, "Courier New";
+	               padding: 50px;
+	           }
+	           
+	           .terminal{
+	               color:green;
+	               font-size: 1.5em;
+	               text-decoration: none;
+	               font-family: monospace;
+	           }
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript">
+	</script>
+	<script src="../jquery.coolType.js" type="text/javascript">
+	</script>
+	<script type="text/javascript">
+	           $(function () {
+	               $('#question').val('Say what?? Can you slow down a bit please?');
+	               $('#instructions').coolType('<h4>This is an example page that uses some neat features of coolTyping...OK???.... Let me repeat that in case you missed it.<\/h4>',{"typeSpeed":100,"loopCount":-1,"typeHTML":"true"});
+	           });
+	           function startTyping(){
+	             
+	               var text = $('#textToTypeHTML').html();
+	               $().cooltTypeDefaults.typeSpeed =40;  // this sets all typing speeds
+	               $().cooltTypeDefaults.typeHTML = true; //passing {"typeHTML":"true"} works too
+	               $('#typeHTMLDiv').coolType(text,{"loopCount":2});
+	           }
+	           function stopTyping(){
+	              $('#questionTextDiv').coolTypeStop();
+	              $('#typeHTMLDiv').coolTypeStop();
+	           
+	           }
+	           
+	           function typeQuestion(){
+	               var prmpt=">>";
+	               if ($('#keepHistory').is(':checked')){
+	                   $('#questionTextDiv').coolType('<br/>'+ prmpt + $('#question').val(),{"typeSpeed":100,"clearMode":false,"typeHTML":"true"});
+	                
+	              }else
+	                {
+	                  $('#questionTextDiv').coolType(prmpt + $('#question').val(),{"typeSpeed":100,"clearMode":true, "typeHTML":"true"});
 
-                 }
-             }
-            
-        </script>
-    </head>
-    <body>
-        <div>
-            <div id="instructions"></div>
-            <p></p>
-            <button onclick="startTyping()">Start HTML Typing</button>
-            <button onclick="stopTyping()">Stop all Typing</button>
-            <p>
-            Ask a Question:<br/>
-            <textarea id="question" rows=3 cols=40></textarea>
-            <button onclick="typeQuestion()">Submit Question</button>
-            <input type="checkbox" id="keepHistory"> Keep History
-            </p>
-        </div>
-        <p><u>HTML typing goes here:</u></p><div id='typeHTMLDiv'></div>
-        <p><u>Question typing goes here:</u></p><div id="questionTextDiv" class="terminal"></div>
-        <div id="textToTypeHTML" style="display: none">
-            <h1>Hello</h1><p>Lets get started with our <b><i>Latin</i></b> lesson...</p>
-            Lorem ipsumdolor sit amet, consectetur adipiscing elit. Etiam porta consectetur pretium. Ut scelerisque, quam eget tempor sollicitudin, ipsum nunc molestie risus, non cursus lacus tortor sed metus. Fusce varius, risus a convallis hendrerit, nisl metus porttitor tellus, eget venenatis metus tellus tincidunt est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.<p> Maecenas sollicitudin porta leo ac suscipit. Donec dictum laoreet tristique.</p>
-            <p>In hac habitasse platea dictumst. Nunc nulla odio, malesuada eu pellentesque sit amet, vestibulum a ipsum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur porttitor, massa id egestas feugiat, purus erat semper massa, sit amet venenatis nunc nisi at justo. Cras posuere commodo fermentum. Integer non est nibh, sit amet tincidunt nibh. Curabitur imperdiet mauris vitae ipsum malesuada a mattis nisi suscipit.</p>
-        </div>
-       
-
-    </body>
+	                }
+	            }
+	           
+	</script>
+</head>
+<body>
+	<div>
+		<div id="instructions"></div>
+		<p></p><button onclick="startTyping()">Start HTML Typing</button> <button onclick="stopTyping()">Stop all Typing</button>
+		<p>Ask a Question:<br>
+		<textarea cols="40" id="question" rows="3"></textarea> <button onclick="typeQuestion()">Submit Question</button> <input id="keepHistory" type="checkbox"> Keep History</p>
+	</div>
+	<p><u>HTML typing goes here:</u></p>
+	<div id='typeHTMLDiv'></div>
+	<p><u>Question typing goes here:</u></p>
+	<div class="terminal" id="questionTextDiv"></div>
+	<div id="textToTypeHTML" style="display: none">
+		<h1>Hello</h1>
+		<p>Lets get started with our <b><i>Latin</i></b> lesson...</p>Lorem ipsumdolor sit amet, consectetur adipiscing elit. Etiam porta consectetur pretium. Ut scelerisque, quam eget tempor sollicitudin, ipsum nunc molestie risus, non cursus lacus tortor sed metus. Fusce varius, risus a convallis hendrerit, nisl metus porttitor tellus, eget venenatis metus tellus tincidunt est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+		<p>Maecenas sollicitudin porta leo ac suscipit. Donec dictum laoreet tristique.</p>
+		<p>In hac habitasse platea dictumst. Nunc nulla odio, malesuada eu pellentesque sit amet, vestibulum a ipsum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur porttitor, massa id egestas feugiat, purus erat semper massa, sit amet venenatis nunc nisi at justo. Cras posuere commodo fermentum. Integer non est nibh, sit amet tincidunt nibh. Curabitur imperdiet mauris vitae ipsum malesuada a mattis nisi suscipit.</p>
+	</div>
+</body>
 </html>

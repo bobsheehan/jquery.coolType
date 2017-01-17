@@ -1,7 +1,7 @@
 (function ($) {
 
     'use strict';
-    $.fn.cooltTypeDefaults = {
+    $.fn.coolTypeDefaults = {
         typeSpeed: 20,
         inline: true,
         cursorChar: '&#9608;',
@@ -58,7 +58,7 @@
     $.fn.coolType = function (text, options) {
        
         var $this = this,
-            settings = $.extend({}, $.fn.cooltTypeDefaults, options);
+            settings = $.extend({}, $.fn.coolTypeDefaults, options);
 
         
         if ($this.data('blinkieId') !== null) {
